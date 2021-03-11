@@ -1,0 +1,24 @@
+{
+  "name": "polarfinder-website-ts",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "webpack serve --mode development",
+    "build": "webpack serve --mode production",
+    "test": "echo \"Error: no text specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jquery": "^3.5.5",
+    "ts-loader": "^8.0.17",
+    "typescript": "^4.2.3",
+    "webpack": "^5.24.4",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0"
+  }
+}

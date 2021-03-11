@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="">
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Polaris Finder - Takahashi Europe</title>
+    <meta name="description" content="Takahashi mount polar alignement in your browser">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="img/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="img/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="img/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="img/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/icons/favicon-16x16.png">
+    <link rel="manifest" href="img/icons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="img/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="css/main.css">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="header">
+
+        <a href="https://takahashi-europe.com"><img src="img/new-logo-te.jpeg" id="main-logo" alt="Takahashi Europe Logo"/></a>
+        <h1 id="main-title">POLARIS FINDER</h1>
+
+        <br>
+
+        <button id="show-content-button">Display informations</button>
+
+        <button id="show-form-button">Edit parameters</button>
+
+        <div id="content">
+            <div id="earth">
+                <strong>Date : </strong> <span class="date"></span> <br>
+                <strong>Local Time : </strong> <span class="time"></span> <br>
+                <strong>Julian Day : </strong> <span class="jday"></span> <br>
+                <br>
+                <strong>Latitude (N + / S -) : </strong> <span class="latitude">UNDEFINED</span> <br>
+                <strong>Longitude (E - / W +) : </strong> <span class="longitude">UNDEFINED</span> <br>
+                <strong>Accuracy : </strong> <span class="accuracy">UNDEFINED</span> <br>
+                <br>
+            </div>
+
+            <div id="polaris">
+
+                <strong id="ha-label">Polaris Hour Angle : </strong> <span class="ha"></span> <br>
+
+            </div>
+
+        </div>
+
+        <div id="edit-tab">
+
+            <strong>Date & Time : </strong> <input type="datetime-local" id="input-datetime">
+            <button id="now-button">NOW</button>
+            <br><br>
+            <strong>Latitude (N + / S -) : </strong> <input type="text" id="input-latitude" placeholder="48.105278">
+            <br><br>
+            <strong>Longitude (E - / W +) : </strong> <input type="text" id="input-longitude" placeholder="7.3767709">
+            <br><br>
+            <strong>Realtime : </strong> <span id="realtime-state"></span><br><br>
+
+            <button id="submit-form-button">Submit data</button>
+
+            <button id="auto-mode-button">Back to realtime</button>
+
+        </div>
+
+    </div>
+
+    <div style="width: 400px; height: 400px;float: right;">
+        <canvas id="canvas-container"></canvas>
+    </div>
+
+    <script src="bundle.js"></script>
+
+</body>
+
+</html>
