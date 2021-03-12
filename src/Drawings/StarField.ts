@@ -1,44 +1,45 @@
+import {Canvas} from "../Canvas";
 
 export class StarField {
 
     private static stars: { brightness: number; x: number; y: number }[];
 
-    public static initialize(ctx:CanvasRenderingContext2D, canvas:HTMLCanvasElement) {
+    public static initialize() {
 
         // Make the background.
-        ctx.fillStyle = "#222";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        Canvas.ctx.fillStyle = "#222";
+        Canvas.ctx.fillRect(0, 0,  Canvas.container.width,  Canvas.container.height);
 
-        this.stars = this.generate_stars(canvas);
+        this.stars = this.generate_stars();
 
     }
 
-    public static draw(ctx:CanvasRenderingContext2D, canvas:HTMLCanvasElement, random=false) {
+    public static draw(random=false) {
 
         if(random){
 
             this.stars.forEach(star => {
-                this.draw_star_pixel(ctx, star.x, star.y, Math.random());
+                this.draw_star_pixel(star.x, star.y, Math.random());
             });
 
         }
         else{
 
             this.stars.forEach(star => {
-                this.draw_star_pixel(ctx, star.x, star.y, star.brightness);
+                this.draw_star_pixel(star.x, star.y, star.brightness);
             });
 
         }
 
     }
 
-    private static generate_stars(canvas:HTMLCanvasElement) {
+    private static generate_stars() {
 
         let stars = [];
         for (let i = 0; i < 1000; i++) {
             stars[i] = {
-                x: this.generate_random_with_max(canvas.width),
-                y: this.generate_random_with_max(canvas.height),
+                x: this.generate_random_with_max(Canvas.container.width),
+                y: this.generate_random_with_max(Canvas.container.height),
                 brightness: Math.random()
             };
         }
@@ -47,13 +48,13 @@ export class StarField {
 
     }
 
-    private static draw_star_pixel(ctx:CanvasRenderingContext2D, x: number, y: number, brightness: number) {
+    private static draw_star_pixel(x: number, y: number, brightness: number) {
 
         const intensity = brightness * 255;
         const rgb = "rgb(" + intensity + "," + intensity + "," + intensity + ")";
 
-        ctx.fillStyle = rgb;
-        ctx.fillRect(x, y, 1, 1);
+        Canvas.ctx.fillStyle = rgb;
+        Canvas.ctx.fillRect(x, y, 1, 1);
 
     }
 

@@ -1,6 +1,9 @@
 
 export class Canvas {
 
+    public static container: HTMLCanvasElement;
+    public static ctx: CanvasRenderingContext2D;
+
     public static getCanvasElementById = (id: string): HTMLCanvasElement => {
 
         const canvas = document.getElementById(id);
@@ -25,27 +28,27 @@ export class Canvas {
 
     }
 
-    public static fixDpi(canvas: HTMLCanvasElement) {
+    public static fixDpi() {
 
         const dpi: number = window.devicePixelRatio;
 
         let style = {
             height() {
-                return + getComputedStyle(canvas).getPropertyValue('height').slice(0,-2);
+                return + getComputedStyle(Canvas.container).getPropertyValue('height').slice(0,-2);
             },
             width() {
-                return + getComputedStyle(canvas).getPropertyValue('width').slice(0,-2);
+                return + getComputedStyle(Canvas.container).getPropertyValue('width').slice(0,-2);
             }
         }
 
-        canvas.setAttribute('width', (style.width() * dpi).toString());
-        canvas.setAttribute('height', (style.height() * dpi).toString());
+        Canvas.container.setAttribute('width', (style.width() * dpi).toString());
+        Canvas.container.setAttribute('height', (style.height() * dpi).toString());
 
     }
 
-    public static clear(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D){
+    public static clear(){
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        Canvas.ctx.clearRect(0, 0, Canvas.container.width, Canvas.container.height);
 
     }
 

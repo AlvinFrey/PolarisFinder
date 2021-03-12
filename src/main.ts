@@ -10,65 +10,73 @@ import { Location } from "./Location";
 import { Gui } from "./Gui";
 import { ServiceWorkerInitializer } from "./ServiceWorkerInitializer";
 
-const canvas: HTMLCanvasElement = Canvas.getCanvasElementById('canvas-container');
-const ctx: CanvasRenderingContext2D = Canvas.getCanvasRenderingContext2D(canvas);
+Canvas.container = Canvas.getCanvasElementById('canvas-container');
+Canvas.ctx = Canvas.getCanvasRenderingContext2D(Canvas.container);
 
 ServiceWorkerInitializer.registerServiceWorker();
 
-Canvas.fixDpi(canvas);
-Canvas.clear(canvas, ctx);
+if(Canvas.container != null && Canvas.ctx != null){
 
-Gui.initialize();
-StarField.initialize(ctx, canvas);
+    Canvas.fixDpi();
+    Canvas.clear();
 
-Location.getPosition();
+    Gui.initialize();
+    StarField.initialize();
 
-setInterval(function () {
+    Location.getPosition();
 
-    Canvas.fixDpi(canvas);
+    setInterval(function () {
 
-    Reticle.draw(ctx, canvas);
-    StarField.draw(ctx, canvas);
+        Canvas.fixDpi();
 
-    let now = new Date();
+        Reticle.draw();
+        StarField.draw();
 
-    if(Gui.manual_mode){
+        let now = new Date();
 
-        now = new Date(<string>$("#input-datetime").val());
+        if(Gui.manual_mode){
 
-    }else{
+            now = new Date(<string>$("#input-datetime").val());
 
-        $("#input-datetime").val((now.toLocaleString("sv-SE") + '').replace(' ','T'));
+        }else{
 
-    }
+            $("#input-datetime").val((now.toLocaleString("sv-SE") + '').replace(' ','T'));
 
-    let utc_now = DateUtils.datetime_to_utc(now);
+        }
 
-    if(Location.latitude < 0){
-        PolarisEphemeris.precession_correction(utc_now);
-    }else{
-        PolarisEphemeris.precession_correction(utc_now);
-    }
+        let utc_now = DateUtils.datetime_to_utc(now);
 
-    let lst = DateUtils.utc_to_lst(utc_now);
+        if(Location.latitude < 0){
+            PolarisEphemeris.precession_correction(utc_now);
+        }else{
+            PolarisEphemeris.precession_correction(utc_now);
+        }
 
-    let ha = PolarisEphemeris.get_polaris_ha(lst);
+        let lst = DateUtils.utc_to_lst(utc_now);
 
-    Gui.updateLabels(now, utc_now, ha);
+        let ha = PolarisEphemeris.get_polaris_ha(lst);
 
-    let polaris = new Polaris(PolarisEphemeris.ha_to_degrees(ha), utc_now.year, ctx, canvas);
+        Gui.updateLabels(now, utc_now, ha);
 
-    polaris.draw();
+        let polaris = new Polaris(PolarisEphemeris.ha_to_degrees(ha), utc_now.year);
 
-}, 100)
+        polaris.draw();
+
+    }, 100)
 
 
-window.addEventListener('resize', () => {
+    window.addEventListener('resize', () => {
 
-    Canvas.clear(canvas, ctx);
+        Canvas.clear();
 
-    Reticle.draw(ctx, canvas);
-    StarField.initialize(ctx, canvas);
-    StarField.draw(ctx, canvas);
+        Reticle.draw();
+        StarField.initialize();
+        StarField.draw();
 
-});
+    });
+
+}else {
+
+    console.log("Can't find canvas or context in HTML document")
+
+}

@@ -1,7 +1,7 @@
 import { StarPositions } from "./StarPositions";
 import { DateUtils } from "./DateUtils";
 import { Location } from "../Location";
-import {Formatting} from "./Formatting";
+import { Formatting } from "./Formatting";
 
 export class PolarisEphemeris {
 

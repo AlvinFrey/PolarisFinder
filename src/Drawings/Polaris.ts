@@ -1,10 +1,9 @@
-import {Location} from "../Location";
+import { Location } from "../Location";
+import { Canvas } from "../Canvas";
 
 export class Polaris {
 
     private readonly now: number;
-    private ctx:CanvasRenderingContext2D;
-    private canvas:HTMLCanvasElement;
     private radius!:number;
 
     private readonly x1: number;
@@ -13,17 +12,15 @@ export class Polaris {
     private readonly min: number;
     private readonly degrees: number;
 
-    constructor(degrees: number, now: number, ctx:CanvasRenderingContext2D, canvas:HTMLCanvasElement) {
+    constructor(degrees: number, now: number) {
 
         this.degrees = degrees;
         this.now = now;
-        this.ctx = ctx;
-        this.canvas = canvas;
 
-        this.x1 = (this.canvas.width/2);
-        this.y1 = (this.canvas.height/2);
+        this.x1 = (Canvas.container.width/2);
+        this.y1 = (Canvas.container.height/2);
 
-        this.min = Math.min(this.canvas.height, this.canvas.width);
+        this.min = Math.min(Canvas.container.height, Canvas.container.width);
 
     }
 
@@ -36,11 +33,11 @@ export class Polaris {
 
     private draw_line() {
 
-        this.ctx.strokeStyle = "green";
+        Canvas.ctx.strokeStyle = "green";
 
-        this.ctx.setLineDash([5, 3]);
+        Canvas.ctx.setLineDash([5, 3]);
 
-        this.ctx.beginPath();
+        Canvas.ctx.beginPath();
 
         this.radius = ((this.min*10)*((0.23 - ((this.now-2050)*0.0005)))) / 10;
 
@@ -49,9 +46,9 @@ export class Polaris {
         }
 
         let theta = (this.degrees * Math.PI / 180)+1.5708;
-        this.ctx.moveTo(this.x1, this.y1);
-        this.ctx.lineTo(this.x1 - this.radius * Math.cos(theta), this.y1 + this.radius * Math.sin(theta));
-        this.ctx.stroke();
+        Canvas.ctx.moveTo(this.x1, this.y1);
+        Canvas.ctx.lineTo(this.x1 - this.radius * Math.cos(theta), this.y1 + this.radius * Math.sin(theta));
+        Canvas.ctx.stroke();
 
     }
 
@@ -59,20 +56,20 @@ export class Polaris {
 
         let pointRadius = 4;
 
-        this.ctx.shadowBlur = 10;
-        this.ctx.shadowOffsetX = 0;
-        this.ctx.shadowOffsetY = 0;
+        Canvas.ctx.shadowBlur = 10;
+        Canvas.ctx.shadowOffsetX = 0;
+        Canvas.ctx.shadowOffsetY = 0;
 
-        this.ctx.fillStyle="white";
-        this.ctx.strokeStyle="#E0E0E0";
-        this.ctx.shadowColor="#E0E0E0";
+        Canvas.ctx.fillStyle="white";
+        Canvas.ctx.strokeStyle="#E0E0E0";
+        Canvas.ctx.shadowColor="#E0E0E0";
 
         let theta = (this.degrees * Math.PI / 180)+1.5708;
 
-        this.ctx.beginPath();
-        this.ctx.arc(this.x1 - this.radius * Math.cos(theta), this.y1 + this.radius * Math.sin(theta), pointRadius, 0, Math.PI*2, true);
-        this.ctx.fill();
-        this.ctx.stroke();
+        Canvas.ctx.beginPath();
+        Canvas.ctx.arc(this.x1 - this.radius * Math.cos(theta), this.y1 + this.radius * Math.sin(theta), pointRadius, 0, Math.PI*2, true);
+        Canvas.ctx.fill();
+        Canvas.ctx.stroke();
 
     }
 

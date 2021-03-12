@@ -1,5 +1,5 @@
 import { Location } from "../Location";
-import {Formatting} from "./Formatting";
+import { Formatting } from "./Formatting";
 
 export class DateUtils {
 
