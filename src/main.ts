@@ -34,15 +34,15 @@ if(Canvas.container != null && Canvas.ctx != null){
 
         let now = new Date();
 
-        if(Gui.manual_mode){
+            if(Gui.manual_mode){
 
-            now = new Date(<string>$("#input-datetime").val());
+                now = new Date(<string>$("#input-datetime").val());
 
-        }else{
+            }else{
 
-            $("#input-datetime").val((now.toLocaleString("sv-SE") + '').replace(' ','T'));
+                $("#input-datetime").val((now.toLocaleString("sv-SE") + '').replace(' ','T'));
 
-        }
+            }
 
         let utc_now = DateUtils.datetime_to_utc(now);
 
