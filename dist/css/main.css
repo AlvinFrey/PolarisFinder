@@ -285,5 +285,13 @@ h1 {
   display: inline-block;
   vertical-align: middle;
   margin-left: 10px;
+  font-size: 25px;
 
+}
+
+#polaris-finder-logo {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
 }
